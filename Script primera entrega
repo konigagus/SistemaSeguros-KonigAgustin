@@ -1,0 +1,55 @@
+-- 1 BD
+DROP DATABASE IF EXISTS SistemaSeguros;
+CREATE DATABASE SistemaSeguros;
+USE SistemaSeguros;
+
+-- 2 Tablas
+CREATE TABLE Asegurados (
+    id_asegurado INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    dni VARCHAR(20) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    direccion VARCHAR(150),
+    telefono VARCHAR(20),
+    fecha_nacimiento DATE,
+    PRIMARY KEY (id_asegurado),
+    UNIQUE (dni),
+    UNIQUE (email)
+);
+
+CREATE TABLE Tipos_Seguro (
+    id_tipo INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_tipo VARCHAR(50) NOT NULL,
+    descripcion TEXT
+);
+
+CREATE TABLE Polizas (
+    id_poliza INT PRIMARY KEY AUTO_INCREMENT,
+    nro_poliza VARCHAR(50) NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE,
+    monto_asegurado DECIMAL(15, 2),
+    estado VARCHAR(20) DEFAULT 'Activa',
+    id_asegurado INT,
+    id_tipo INT,
+    CONSTRAINT FK_Asegurado FOREIGN KEY (id_asegurado) REFERENCES Asegurados(id_asegurado) ON DELETE CASCADE,
+    CONSTRAINT FK_TipoSeguro FOREIGN KEY (id_tipo) REFERENCES Tipos_Seguro(id_tipo) ON DELETE CASCADE
+);
+
+CREATE TABLE Siniestros (
+    id_siniestro INT PRIMARY KEY AUTO_INCREMENT,
+    fecha_siniestro DATE NOT NULL,
+    monto_reclamado DECIMAL(15, 2),
+    descripcion_incidente TEXT,
+    id_poliza INT,
+    CONSTRAINT FK_Poliza_Siniestro FOREIGN KEY (id_poliza) REFERENCES Polizas(id_poliza) ON DELETE CASCADE
+);
+
+CREATE TABLE Pagos (
+    id_pago INT PRIMARY KEY AUTO_INCREMENT,
+    fecha_pago DATETIME DEFAULT CURRENT_TIMESTAMP,
+    monto DECIMAL(10, 2) NOT NULL,
+    metodo_pago VARCHAR(50),
+    id_poliza INT,
+    CONSTRAINT FK_Poliza_Pago FOREIGN KEY (id_poliza) REFERENCES Polizas(id_poliza) ON DELETE CASCADE
+);
