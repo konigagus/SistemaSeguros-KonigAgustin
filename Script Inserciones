@@ -1,0 +1,60 @@
+USE SistemaSeguros;
+
+-- TIPOS DE SEGURO
+INSERT INTO Tipos_Seguro (nombre_tipo, descripcion) VALUES
+('Automotor','Seguro para vehículos'),
+('Hogar','Seguro para viviendas'),
+('Vida','Seguro de vida');
+
+-- METODOS DE PAGO
+INSERT INTO Metodos_Pago (nombre_metodo) VALUES
+('Tarjeta de crédito'),
+('Transferencia bancaria'),
+('Efectivo');
+
+-- ASEGURADOS
+INSERT INTO Asegurados (nombre,dni,email,direccion,telefono,fecha_nacimiento) VALUES
+('Juan Perez','30111222','juan.perez@mail.com','Av Siempre Viva 123','111111111','1985-05-10'),
+('Maria Gomez','28999888','maria.gomez@mail.com','Calle 25 456','222222222','1990-02-15'),
+('Carlos Lopez','31555444','carlos.lopez@mail.com','San Martin 789','333333333','1988-08-20'),
+('Laura Fernandez','29988777','laura.fernandez@mail.com','Belgrano 321','444444444','1992-07-11'),
+('Pedro Martinez','27666555','pedro.martinez@mail.com','Rivadavia 654','555555555','1983-09-05'),
+('Ana Rodriguez','32444555','ana.rodriguez@mail.com','Mitre 852','666666666','1995-03-17'),
+('Diego Sanchez','30123456','diego.sanchez@mail.com','Lavalle 741','777777777','1987-11-23'),
+('Sofia Ramirez','28900123','sofia.ramirez@mail.com','Urquiza 963','888888888','1993-04-12'),
+('Lucas Torres','31222333','lucas.torres@mail.com','Moreno 147','999999999','1989-06-28'),
+('Valentina Diaz','29888999','valentina.diaz@mail.com','Callao 258','101010101','1996-01-30');
+
+-- POLIZAS
+INSERT INTO Polizas (nro_poliza,fecha_inicio,fecha_fin,monto_asegurado,estado,id_asegurado,id_tipo) VALUES
+('POL001','2024-01-01','2025-01-01',100000,'Activa',1,1),
+('POL002','2024-01-10','2025-01-10',150000,'Activa',2,2),
+('POL003','2024-02-01','2025-02-01',200000,'Activa',3,3),
+('POL004','2024-02-15','2025-02-15',120000,'Activa',4,1),
+('POL005','2024-03-01','2025-03-01',180000,'Activa',5,2),
+('POL006','2024-03-10','2025-03-10',130000,'Activa',6,3),
+('POL007','2024-04-01','2025-04-01',170000,'Activa',7,1),
+('POL008','2024-04-15','2025-04-15',220000,'Activa',8,2),
+('POL009','2024-05-01','2025-05-01',140000,'Activa',9,3),
+('POL010','2024-05-10','2025-05-10',160000,'Activa',10,1);
+
+-- PAGOS
+INSERT INTO Pagos (monto,id_metodo_pago,id_poliza) VALUES
+(10000,1,1),
+(12000,2,2),
+(15000,3,3),
+(9000,1,4),
+(11000,2,5),
+(13000,3,6),
+(10000,1,7),
+(12500,2,8),
+(14000,3,9),
+(16000,1,10);
+
+-- SINIESTROS
+INSERT INTO Siniestros (fecha_siniestro,monto_reclamado,descripcion_incidente,id_poliza) VALUES
+('2024-06-10',50000,'Choque leve',1),
+('2024-06-18',30000,'Daño por agua',5),
+('2024-07-02',70000,'Accidente vehicular',4),
+('2024-07-10',20000,'Robo en vivienda',8),
+('2024-07-20',45000,'Incendio parcial',2);	
